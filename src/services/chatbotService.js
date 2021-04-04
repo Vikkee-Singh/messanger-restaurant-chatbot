@@ -385,11 +385,6 @@ let sendAppetizer = (sender_psid) => {
                         "title": "Fresh Oysters",
                         "subtitle": "1/2 Dozen - $21.00 | Dozen - $40.00",
                         "image_url": "https://bit.ly/imageSalad",
-                        "buttons": [{
-                            "type": "postback",
-                            "title": "RESERVE A TABLE",
-                            "payload": "RESERVE_TABLE",
-                        }],
                     },
                     {
                         "title": "Go Back",
