@@ -158,7 +158,7 @@ let sendLunchMenu = (sender_psid) => {
                       {
                           "title": "Appetizers",
                         //   "subtitle": "We are please to offer you the a wide-range of menu for lunch and dinner.",
-                          "image_url": "https://bit.ly/imageMenu",
+                          "image_url": "https://bit.ly/imageAppetizer",
                           "buttons": [{
                               "type": "postback",
                               "title": "SHOW APPETIZERS",
@@ -167,7 +167,7 @@ let sendLunchMenu = (sender_psid) => {
                       },
                       {
                           "title": "Entree Salad",
-                          "image_url": "https://bit.ly/imageOpening",
+                          "image_url": "https://bit.ly/imageSalad",
                           "buttons": [{
                               "type": "postback",
                               "title": "SHOW ENTREE SALAD",
@@ -177,7 +177,7 @@ let sendLunchMenu = (sender_psid) => {
                       {
                           "title": "Fish and Shell Fish",
                           "subtitle": "Dry -aged on premise",
-                          "image_url": "https://bit.ly/imageShowRooms",
+                          "image_url": "https://bit.ly/imageFish",
                           "buttons": [{
                               "type": "postback",
                               "title": "SHOW FISH",
@@ -321,6 +321,59 @@ let sendPubMenu = (sender_psid) => {
         }
     });
 }
+// send Appetizer
+let sendAppetizer = (sender_psid) => {
+    return new Promise((resolve, reject)=>{
+        try {
+          let response = {
+              "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [
+                      {
+                          "title": "Little Neck Clams on the Half Shell",
+                          "Subtitle": "Dozen - $20.00",
+                          "image_url": "https://bit.ly/imageAppetizer",
+                      },
+                      {
+                          "title": "Fresh Oysters",
+                          "subtitle": "1/2 Dozen - $21.00 | Dozen - $40.00",
+                          "image_url": "https://bit.ly/imageSalad",
+                      },
+                      {
+                          "title": "Lobster Salad",
+                          "subtitle": "Half Lobster with Avocado and Grapefruit",
+                          "image_url": "https://bit.ly/imageFish",
+                      },
+                      {
+                        "title": "Go Back",
+                        "image_url": "https://bit.ly/imageShowRooms",
+                        "buttons": [{
+                            "type": "postback",
+                            "title": "BACK TO LUNCH MENU",
+                            "payload": "BACK_TO_LUNCH_MENU",
+                        },{
+                            "type": "postback",
+                            "title": "GO TO MAIN MENU",
+                            "payload": "GO_TO_MAIN_MENU",
+                        }],
+                    }
+                    ]
+                  }
+              }
+          }
+          sendMessage(sender_psid, response);
+          resolve({value: "Appetizer Sent!"});
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+// send Back To Menu
+// let sendBackToMenu = (sender_psid) => {
+    
+// }
 
 module.exports = {
     getFacebookUsername,
@@ -328,5 +381,7 @@ module.exports = {
     sendMainMenu,
     sendLunchMenu,
     sendDinnerMenu,
-    sendPubMenu
+    sendPubMenu,
+    sendAppetizer,
+    // sendBackToMenu
 }
