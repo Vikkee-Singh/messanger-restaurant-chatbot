@@ -146,6 +146,7 @@ let handlePostback = async (sender_psid, received_postback) => {
             response = { }
             break;
         case "SHOW_APPETIZERS":
+            console.log("=========>", payload);
             await chatbootService.sendAppetizer(sender_psid);
             break;
         case "SHOW_ENTREE_SALAD":
