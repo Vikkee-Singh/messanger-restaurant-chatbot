@@ -1,6 +1,6 @@
 require('dotenv').config();
 import request from "request";
-
+import chatbootService from "../services/chatbotService";
 // env const to use in side functions
 let MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
@@ -124,9 +124,9 @@ async function handlePostback(sender_psid, received_postback) {
     // Set the response based on the postback payload
     switch (payload) {
         case "GET_STARTED":
-            let senderProfile = await getFacebookUsername(sender_psid);
-            console.log("senderProfile =>", senderProfile);
-            response = { "text": "Welcome to Vikkee Singh's Restaurent!" }
+            let username = await chatbootService.getFacebookUsername(sender_psid);
+            console.log("username =>", username);
+            response = { "text": `Welcome ${username} to Vikkee Singh's Restaurent!` }
             break;
         case "yes":
             response = { "text": "Thanks!" }
@@ -168,29 +168,7 @@ function callSendAPI(sender_psid, response) {
 
   }
 
-  function getFacebookUsername(sender_psid) {
-    //   curl -X GET "https://graph.facebook.com/<PSID>?fields=first_name,last_name,profile_pic&access_token=<PAGE_ACCESS_TOKEN>"
-    let uri = `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`
-    return new Promise((resolve, reject)=>{
-        try {
-            request({
-                "uri": uri,
-                "method": "GET",
-              }, (err, res, body) => {
-                if (!err) {
-                  console.log('res =>', res);
-                  resolve(res);
-                } else {
-                    reject(err.message);
-                  console.error("Unable to get user info:" + err);
-                }
-            });
-        } catch (error) {
-            reject(error.message);
-        }
-    });
 
-  }
 
 module.exports = {
     postWebHook,
