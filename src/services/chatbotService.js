@@ -113,7 +113,8 @@ let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
                     }
                 }
             }
-            sendMessage(sender_psid, response); 
+            sendMessage(sender_psid, response);
+            resolve({value: "Menu Sent!"})
           } catch (error) {
               reject(error);
           }
@@ -144,8 +145,188 @@ let sendMessage = (sender_psid, response) => {
         }); 
 }
 
+// Send Lunch menu
+let sendLunchMenu = (sender_psid) => {
+    return new Promise((resolve, reject)=>{
+        try {
+          let response = {
+              "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [
+                      {
+                          "title": "Appetizers",
+                        //   "subtitle": "We are please to offer you the a wide-range of menu for lunch and dinner.",
+                          "image_url": "https://bit.ly/imageMenu",
+                          "buttons": [{
+                              "type": "postback",
+                              "title": "SHOW APPETIZERS",
+                              "payload": "SHOW_APPETIZERS",
+                          }],
+                      },
+                      {
+                          "title": "Entree Salad",
+                          "image_url": "https://bit.ly/imageOpening",
+                          "buttons": [{
+                              "type": "postback",
+                              "title": "SHOW ENTREE SALAD",
+                              "payload": "SHOW_ENTREE_SALAD",
+                          }],
+                      },
+                      {
+                          "title": "Fish and Shell Fish",
+                          "subtitle": "Dry -aged on premise",
+                          "image_url": "https://bit.ly/imageShowRooms",
+                          "buttons": [{
+                              "type": "postback",
+                              "title": "SHOW FISH",
+                              "payload": "SHOW_FISH",
+                          }],
+                      },{
+                        "title": "Go Back",
+                        "image_url": "https://bit.ly/imageShowRooms",
+                        "buttons": [{
+                            "type": "postback",
+                            "title": "GO TO MAIN MENU",
+                            "payload": "GO_TO_MAIN_MENU",
+                        }],
+                    }
+                    ]
+                  }
+              }
+          }
+          sendMessage(sender_psid, response);
+          resolve({value: "Lunch Menu Sent!"});
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
+// Send Dinner menu
+let sendDinnerMenu = (sender_psid) => {
+    return new Promise((resolve, reject)=>{
+        try {
+          let response = {
+              "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [
+                      {
+                          "title": "Appetizers",
+                        //   "subtitle": "We are please to offer you the a wide-range of menu for lunch and dinner.",
+                          "image_url": "https://bit.ly/imageMenu",
+                          "buttons": [{
+                              "type": "postback",
+                              "title": "SHOW APPETIZERS",
+                              "payload": "SHOW_APPETIZERS",
+                          }],
+                      },
+                      {
+                          "title": "Entree Salad",
+                          "image_url": "https://bit.ly/imageOpening",
+                          "buttons": [{
+                              "type": "postback",
+                              "title": "SHOW ENTREE SALAD",
+                              "payload": "SHOW_ENTREE_SALAD",
+                          }],
+                      },
+                      {
+                          "title": "Fish and Shell Fish",
+                          "subtitle": "Dry -aged on premise",
+                          "image_url": "https://bit.ly/imageShowRooms",
+                          "buttons": [{
+                              "type": "postback",
+                              "title": "SHOW FISH",
+                              "payload": "SHOW_FISH",
+                          }],
+                      },{
+                        "title": "Go Back",
+                        "image_url": "https://bit.ly/imageShowRooms",
+                        "buttons": [{
+                            "type": "postback",
+                            "title": "GO TO MAIN MENU",
+                            "payload": "GO_TO_MAIN_MENU",
+                        }],
+                    }
+                    ]
+                  }
+              }
+          }
+          sendMessage(sender_psid, response);
+          resolve({value: "Lunch Menu Sent!"});
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
+// Send Pub menu
+let sendPubMenu = (sender_psid) => {
+    return new Promise((resolve, reject)=>{
+        try {
+          let response = {
+              "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [
+                      {
+                          "title": "Appetizers",
+                        //   "subtitle": "We are please to offer you the a wide-range of menu for lunch and dinner.",
+                          "image_url": "https://bit.ly/imageMenu",
+                          "buttons": [{
+                              "type": "postback",
+                              "title": "SHOW APPETIZERS",
+                              "payload": "SHOW_APPETIZERS",
+                          }],
+                      },
+                      {
+                          "title": "Entree Salad",
+                          "image_url": "https://bit.ly/imageOpening",
+                          "buttons": [{
+                              "type": "postback",
+                              "title": "SHOW ENTREE SALAD",
+                              "payload": "SHOW_ENTREE_SALAD",
+                          }],
+                      },
+                      {
+                          "title": "Fish and Shell Fish",
+                          "subtitle": "Dry -aged on premise",
+                          "image_url": "https://bit.ly/imageShowRooms",
+                          "buttons": [{
+                              "type": "postback",
+                              "title": "SHOW FISH",
+                              "payload": "SHOW_FISH",
+                          }],
+                      },{
+                        "title": "Go Back",
+                        "image_url": "https://bit.ly/imageShowRooms",
+                        "buttons": [{
+                            "type": "postback",
+                            "title": "GO TO MAIN MENU",
+                            "payload": "GO_TO_MAIN_MENU",
+                        }],
+                    }
+                    ]
+                  }
+              }
+          }
+          sendMessage(sender_psid, response);
+          resolve({value: "Lunch Menu Sent!"});
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 module.exports = {
     getFacebookUsername,
     sendResWelcomeNewCostomer,
-    sendMainMenu
+    sendMainMenu,
+    sendLunchMenu,
+    sendDinnerMenu,
+    sendPubMenu
 }

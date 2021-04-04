@@ -130,6 +130,27 @@ let handlePostback = async (sender_psid, received_postback) => {
         case "MAIN_MENU":
             await chatbootService.sendMainMenu(sender_psid);
             break;
+        case "LUNCH_MENU":
+            await chatbootService.sendLunchMenu(sender_psid);
+            break;
+        case "DINNER_MENU":
+            await chatbootService.sendDinnerMenu(sender_psid);
+            break;
+        case "PUB_MENU":
+            await chatbootService.sendPubMenu(sender_psid);
+            break;
+        case "RESERVE_TABLE":
+            response = { }
+            break;
+        case "SHOW_ROOMS":
+            response = { }
+            break;
+        // case "no":
+        //     break;
+        // case "yes":
+        //     break;
+        // case "no":
+        //     break;
         case "yes":
             response = { "text": "Thanks!" }
             break;
@@ -137,7 +158,6 @@ let handlePostback = async (sender_psid, received_postback) => {
             response = { "text": "Oops, try sending another image." }
             break;
         default:
-            console.log("Payload ==========> ", payload);
             console.log("Somthing wrong with switch case payload");
             break;
     }
