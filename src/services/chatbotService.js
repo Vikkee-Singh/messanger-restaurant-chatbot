@@ -403,12 +403,16 @@ let sendAppetizer = (sender_psid) => {
                         }],
                     },
                     {
-                        "title": "Benquest Rooms",
+                        "title": "Go Back",
                         "image_url": "https://bit.ly/imageShowRooms",
                         "buttons": [{
                             "type": "postback",
-                            "title": "SHOW ROOMS",
-                            "payload": "SHOW_ROOMS",
+                            "title": "BACK TO LUNCH MENU",
+                            "payload": "BACK_TO_LUNCH_MENU",
+                        },{
+                            "type": "postback",
+                            "title": "GO TO MAIN MENU",
+                            "payload": "GO_TO_MAIN_MENU",
                         }],
                     }
                   ]
