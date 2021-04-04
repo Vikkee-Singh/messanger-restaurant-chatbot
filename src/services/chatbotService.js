@@ -183,7 +183,8 @@ let sendLunchMenu = (sender_psid) => {
                               "title": "SHOW FISH",
                               "payload": "SHOW_FISH",
                           }],
-                      },{
+                      },
+                      {
                         "title": "Go Back",
                         "image_url": "https://bit.ly/imageShowRooms",
                         "buttons": [{
@@ -191,7 +192,7 @@ let sendLunchMenu = (sender_psid) => {
                             "title": "GO TO MAIN MENU",
                             "payload": "GO_TO_MAIN_MENU",
                         }],
-                    }
+                     }
                     ]
                   }
               }
@@ -363,6 +364,7 @@ let sendAppetizer = (sender_psid) => {
                   }
               }
           }
+          console.log("=>>>>>>>>>>>", response);
           sendMessage(sender_psid, response);
           resolve({value: "Appetizer Sent!"});
         } catch (error) {
