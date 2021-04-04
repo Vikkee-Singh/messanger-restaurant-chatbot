@@ -47,23 +47,23 @@ let setUpUserFacebookProfile = (req, res) => {
         "qs": { "access_token": PAGE_ACCESS_TOKEN },
         "method": "POST",
         "json": data
-      }, (err, res, body) => {
+      }, (err, resp, body) => {
         if (!err) {
-            return res.status(200).json({
+            res.status(200).json({
                 message: "setUp done!"
             })
         //   console.log('message sent!')
         } else {
-            return res.status(500).json({
+            res.status(500).json({
                 message: "error form node server"
             })
         //   console.error("Unable to send message:" + err);
         }
       }); 
 
-    return res.status(200).json({
-        message: "Ok"
-    })
+    // return res.status(200).json({
+    //     message: "Ok"
+    // })
 }
 module.exports = {
     getHomePage,
