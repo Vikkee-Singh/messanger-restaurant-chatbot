@@ -8,7 +8,7 @@ let getHomePage = (req, res)=>{
 let getFacebookUserProfile = (req, res) => {
     return res.render("profile.ejs")
 }
-let setUpUserFacebookProfile = (req, res) => {
+let setUpUserFacebookProfile = async (req, res) => {
     // let data = {
     //     "get_started":{
     //         "payload": "GET_STARTED"
@@ -61,11 +61,11 @@ let setUpUserFacebookProfile = (req, res) => {
 
     try {
         await homepageService.setUpMessengerPlatform(PAGE_ACCESS_TOKEN);
-        return res.status(200).json({
+        res.status(200).json({
             message: "Ok"
-        })
+        });
     } catch (error) {
-        return res.status(500).json({
+        res.status(500).json({
             message: "error form node server"
         })
     }

@@ -374,8 +374,8 @@ let sendAppetizer = (sender_psid) => {
     });
 }
 // send Back To Menu
-let handleReserveTable = async (sender_psid) => {
-    return new Promise((resolve, reject)=>{
+let handleReserveTable = (sender_psid) => {
+    return new Promise( async (resolve, reject)=>{
         try {
             let username = await getFacebookUsername(sender_psid);
             let response = { text:  `Hi ${username}, What time and date you would like to reserve a table ?` }
