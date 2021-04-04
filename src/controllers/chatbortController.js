@@ -115,7 +115,7 @@ function handleMessage(sender_psid, received_message) {
   }
 
 // Handles messaging_postbacks events
-function handlePostback(sender_psid, received_postback) {
+async function handlePostback(sender_psid, received_postback) {
     let response;
   
     // Get the payload for the postback
@@ -124,6 +124,8 @@ function handlePostback(sender_psid, received_postback) {
     // Set the response based on the postback payload
     switch (payload) {
         case "GET_STARTED":
+            let senderProfile = await getFacebookUsername(sender_psid);
+            console.log("senderProfile =>", senderProfile);
             response = { "text": "Welcome to Vikkee Singh's Restaurent!" }
             break;
         case "yes":
@@ -163,6 +165,30 @@ function callSendAPI(sender_psid, response) {
         console.error("Unable to send message:" + err);
       }
     }); 
+
+  }
+
+  function getFacebookUsername(sender_psid) {
+    //   curl -X GET "https://graph.facebook.com/<PSID>?fields=first_name,last_name,profile_pic&access_token=<PAGE_ACCESS_TOKEN>"
+    let uri = `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`
+    return new Promise((resolve, reject)=>{
+        try {
+            request({
+                "uri": uri,
+                "method": "GET",
+              }, (err, res, body) => {
+                if (!err) {
+                  console.log('res =>', res);
+                  resolve(res);
+                } else {
+                    reject(err.message);
+                  console.error("Unable to get user info:" + err);
+                }
+            });
+        } catch (error) {
+            reject(error.message);
+        }
+    });
 
   }
 
