@@ -117,7 +117,7 @@ function handleMessage(sender_psid, received_message) {
 }
 
 let handleMessageWithEntities = (message) => {
-    let entitesArr  = ["datetime", "phone_number" ];
+    let entitesArr  = ["wit$datetime:datetime", "wit$phone_number:phone_number" ];
     let entityChosen = "";
 
     entitesArr.forEach(element => {
@@ -132,7 +132,7 @@ let handleMessageWithEntities = (message) => {
 function firstEntity(nlp, name) {
     console.log("nlp ===>", nlp);
     console.log("name ===>", name);
-	return nlp && nlp.entities && nlp.entitie[name] && nlp.entities[name][0];
+	return nlp && nlp.entities && nlp.entitie[`${name}`] && nlp.entities[`${name}`][0];
 }
 
 // Handles messaging_postbacks events
