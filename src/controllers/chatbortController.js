@@ -120,18 +120,15 @@ function handlePostback(sender_psid, received_postback) {
   
     // Get the payload for the postback
     let payload = received_postback.payload;
-  console.log("payload ===>", payload, "typeof", typeof payload);
+
     // Set the response based on the postback payload
     if (payload === 'yes') {
       response = { "text": "Thanks!" }
     } else if (payload === 'no') {
       response = { "text": "Oops, try sending another image." }
     } else if (payload === 'GET_STARTED') {
-        console.log("i'm hear.....!");
+        response = { "text": "Hiiii there!" }
     }
-    response = { "text": `Hi there! ${payload}` }
-    console.log("response ===>", response);
-
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
 }

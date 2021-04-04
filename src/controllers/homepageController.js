@@ -11,7 +11,7 @@ let getFacebookUserProfile = (req, res) => {
 let setUpUserFacebookProfile = (req, res) => {
     let data = {
         "get_started":{
-            "payload":" GET_STARTED"
+            "payload": "GET_STARTED"
         },
         "persistent_menu": [
             {
