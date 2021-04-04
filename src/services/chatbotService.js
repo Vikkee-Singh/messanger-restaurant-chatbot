@@ -26,31 +26,98 @@ let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
 
   let sendResWelcomeNewCostomer = (username, sender_psid) => {
       return new Promise((resolve,reject)=>{
-        let response_first = { "text": `Welcome ${username} to Vikkee Singh's Restaurent!` }
-        let response_secound = {
-            "attachment": {
-              "type": "template",
-              "payload": {
-                "template_type": "generic",
-                "elements": [{
-                  "title": "Vikkkee's Restaurent",
-                  "image_url": "https://bit.ly/imageToSend",
-                  "buttons": [
-                    {
-                      "type": "postback",
-                      "title": "Main Menu",
-                      "payload": "MENU",
+          try {
+            let response_first = { "text": `Welcome ${username} to Vikkee Singh's Restaurent!` }
+            let response_secound = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                      "template_type": "generic",
+                      "elements": [{
+                        "title": "Vikkkee's Restaurent",
+                        "subtitle": "My restaurent is legendary, its classic wine collection equally so.",
+                        "image_url": "https://bit.ly/imageToSend",
+                        "buttons": [
+                          {
+                            "type": "postback",
+                            "title": "SHOW MAIN MENU",
+                            "payload": "MAIN_MENU",
+                          }
+                        ],
+                      }]
                     }
-                  ],
-                }]
-              }
+                }
             }
-        }
-        // send welcome message
-        sendMessage(sender_psid, response_first);
-        // send image with button view Menu
-        sendMessage(sender_psid, response_secound);
+              // send welcome message
+              sendMessage(sender_psid, response_first);
+              // send image with button view Menu
+              sendMessage(sender_psid, response_secound);
+              
+              resolve({value: "Done"})
+          } catch (error) {
+            reject(error);
+          }
       })
+  }
+
+  let sendMainMenu = (sender_psid) => {
+      return new Promise((resolve, reject)=>{
+          try {
+            let response = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                      "template_type": "generic",
+                      "elements": [
+                        {
+                            "title": "Our menus",
+                            "subtitle": "We are please to offer you the a wide-range of menu for lunch and dinner.",
+                            "image_url": "https://bit.ly/imageToSend",
+                            "buttons": [{
+                                "type": "postback",
+                                "title": "LUNCH MENU",
+                                "payload": "LUNCH_MENU",
+                            },{
+                                "type": "postback",
+                                "title": "DINNER MENU",
+                                "payload": "DINNER_MENU",
+                            },{
+                                "type": "postback",
+                                "title": "PUB MENU",
+                                "payload": "PUB_MENU",
+                            }],
+                        },
+                        {
+                            "title": "Hours",
+                            "subtitle": `MON-FRI 10:00AM - 11:00PM
+                                        SAT 05:00PM - 10:00PM
+                                        SUN 05:00PM - 09:00PM
+                            `,
+                            "image_url": "https://bit.ly/imageToSend",
+                            "buttons": [{
+                                "type": "postback",
+                                "title": "RESERVE A TABLE",
+                                "payload": "RESERVE_TABLE",
+                            }],
+                        },
+                        {
+                            "title": "Benquest Rooms",
+                            "image_url": "https://bit.ly/imageToSend",
+                            "buttons": [{
+                                "type": "postback",
+                                "title": "SHOW ROOMS",
+                                "payload": "SHOW_ROOMS",
+                            }],
+                        }
+                      ]
+                    }
+                }
+            }
+            sendMessage(sender_psid, response); 
+          } catch (error) {
+              reject(error);
+          }
+      });
   }
 
   // Sends response messages via the Send API
@@ -75,7 +142,7 @@ let sendMessage = (sender_psid, response) => {
               console.error("Unable to send message:" + err);
           }
         }); 
-  }
+}
 
 module.exports = {
     getFacebookUsername,

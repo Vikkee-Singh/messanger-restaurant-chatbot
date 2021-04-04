@@ -127,6 +127,9 @@ let handlePostback = async (sender_psid, received_postback) => {
             await chatbootService.sendResWelcomeNewCostomer(username, sender_psid);
             // response = { "text": `Welcome ${username} to Vikkee Singh's Restaurent!` }
             break;
+        case "MAIN_MENU":
+            await chatbootService.sendMainMenu(sender_psid);
+            break;
         case "yes":
             response = { "text": "Thanks!" }
             break;
