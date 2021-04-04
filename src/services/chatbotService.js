@@ -372,42 +372,35 @@ let sendAppetizer = (sender_psid) => {
                   "template_type": "generic",
                   "elements": [
                     {
-                        "title": "Appetizers",
-                      //   "subtitle": "We are please to offer you the a wide-range of menu for lunch and dinner.",
+                        "title": "Little Neck Clams on the Half Shell",
+                        "Subtitle": "Dozen - $20.00",
                         "image_url": "https://bit.ly/imageAppetizer",
-                        "buttons": [{
-                            "type": "postback",
-                            "title": "SHOW APPETIZERS",
-                            "payload": "SHOW_APPETIZERS",
-                        }],
+                        "buttons": [],
                     },
                     {
-                        "title": "Entree Salad",
+                        "title": "Fresh Oysters",
+                        "subtitle": "1/2 Dozen - $21.00 | Dozen - $40.00",
                         "image_url": "https://bit.ly/imageSalad",
-                        "buttons": [{
-                            "type": "postback",
-                            "title": "SHOW ENTREE SALAD",
-                            "payload": "SHOW_ENTREE_SALAD",
-                        }],
+                        "buttons": [],
                     },
                     {
-                        "title": "Fish and Shell Fish",
-                        "subtitle": "Dry -aged on premise",
-                        "image_url": "https://bit.ly/imageFish",
-                        "buttons": [{
-                            "type": "postback",
-                            "title": "SHOW FISH",
-                            "payload": "SHOW_FISH",
-                        }],
+                          "title": "Lobster Salad",
+                          "subtitle": "Half Lobster with Avocado and Grapefruit",
+                          "image_url": "https://bit.ly/imageFish",
+                        "buttons": [],
                     },
                     {
-                      "title": "Go Back",
-                      "image_url": "https://bit.ly/imageShowRooms",
-                      "buttons": [{
-                          "type": "postback",
-                          "title": "GO TO MAIN MENU",
-                          "payload": "GO_TO_MAIN_MENU",
-                      }],
+                        "title": "Go Back",
+                        "image_url": "https://bit.ly/imageShowRooms",
+                        "buttons": [{
+                            "type": "postback",
+                            "title": "BACK TO LUNCH MENU",
+                            "payload": "BACK_TO_LUNCH_MENU",
+                        },{
+                            "type": "postback",
+                            "title": "GO TO MAIN MENU",
+                            "payload": "GO_TO_MAIN_MENU",
+                        }],
                    }
                   ]
                 }
