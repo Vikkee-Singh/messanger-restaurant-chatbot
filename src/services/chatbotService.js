@@ -372,30 +372,19 @@ let sendAppetizer = (sender_psid) => {
                   "template_type": "generic",
                   "elements": [
                     {
-                        "title": "Our menus",
-                        "subtitle": "We are please to offer you the a wide-range of menu for lunch and dinner.",
-                        "image_url": "https://bit.ly/imageMenu",
+                        "title": "Little Neck Clams on the Half Shell",
+                        "subtitle": "Dozen - $20.00",
+                        "image_url": "https://bit.ly/imageAppetizer",
                         "buttons": [{
                             "type": "postback",
                             "title": "LUNCH MENU",
                             "payload": "LUNCH_MENU",
-                        },{
-                            "type": "postback",
-                            "title": "DINNER MENU",
-                            "payload": "DINNER_MENU",
-                        },{
-                            "type": "postback",
-                            "title": "PUB MENU",
-                            "payload": "PUB_MENU",
                         }],
                     },
                     {
-                        "title": "Hours",
-                        "subtitle": `MON-FRI 10:00AM - 11:00PM
-                                    SAT 05:00PM - 10:00PM
-                                    SUN 05:00PM - 09:00PM
-                        `,
-                        "image_url": "https://bit.ly/imageOpening",
+                        "title": "Fresh Oysters",
+                        "subtitle": "1/2 Dozen - $21.00 | Dozen - $40.00",
+                        "image_url": "https://bit.ly/imageSalad",
                         "buttons": [{
                             "type": "postback",
                             "title": "RESERVE A TABLE",
