@@ -124,8 +124,8 @@ let handlePostback = async (sender_psid, received_postback) => {
     switch (payload) {
         case "GET_STARTED":
             let username = await chatbootService.getFacebookUsername(sender_psid);
-            console.log("username =>", username);
-            response = { "text": `Welcome ${username} to Vikkee Singh's Restaurent!` }
+            await chatbootService.sendResWelcomeNewCostomer(username, sender_psid);
+            // response = { "text": `Welcome ${username} to Vikkee Singh's Restaurent!` }
             break;
         case "yes":
             response = { "text": "Thanks!" }
@@ -138,7 +138,7 @@ let handlePostback = async (sender_psid, received_postback) => {
             break;
     }
     // Send the message to acknowledge the postback
-    callSendAPI(sender_psid, response);
+    // callSendAPI(sender_psid, response);
 }
 
 // Sends response messages via the Send API
