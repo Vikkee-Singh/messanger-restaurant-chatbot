@@ -137,6 +137,7 @@ let handlePostback = async (sender_psid, received_postback) => {
             response = { "text": "Oops, try sending another image." }
             break;
         default:
+            console.log("Payload ==========> ", payload);
             console.log("Somthing wrong with switch case payload");
             break;
     }
