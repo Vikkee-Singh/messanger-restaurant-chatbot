@@ -372,36 +372,45 @@ let sendAppetizer = (sender_psid) => {
                   "template_type": "generic",
                   "elements": [
                     {
-                        "title": "Little Neck Clams on the Half Shell",
-                        "Subtitle": "Dozen - $20.00",
-                        "image_url": "https://bit.ly/imageAppetizer",
-                        "buttons": [],
+                        "title": "Our menus",
+                        "subtitle": "We are please to offer you the a wide-range of menu for lunch and dinner.",
+                        "image_url": "https://bit.ly/imageMenu",
+                        "buttons": [{
+                            "type": "postback",
+                            "title": "LUNCH MENU",
+                            "payload": "LUNCH_MENU",
+                        },{
+                            "type": "postback",
+                            "title": "DINNER MENU",
+                            "payload": "DINNER_MENU",
+                        },{
+                            "type": "postback",
+                            "title": "PUB MENU",
+                            "payload": "PUB_MENU",
+                        }],
                     },
                     {
-                        "title": "Fresh Oysters",
-                        "subtitle": "1/2 Dozen - $21.00 | Dozen - $40.00",
-                        "image_url": "https://bit.ly/imageSalad",
-                        "buttons": [],
+                        "title": "Hours",
+                        "subtitle": `MON-FRI 10:00AM - 11:00PM
+                                    SAT 05:00PM - 10:00PM
+                                    SUN 05:00PM - 09:00PM
+                        `,
+                        "image_url": "https://bit.ly/imageOpening",
+                        "buttons": [{
+                            "type": "postback",
+                            "title": "RESERVE A TABLE",
+                            "payload": "RESERVE_TABLE",
+                        }],
                     },
                     {
-                          "title": "Lobster Salad",
-                          "subtitle": "Half Lobster with Avocado and Grapefruit",
-                          "image_url": "https://bit.ly/imageFish",
-                        "buttons": [],
-                    },
-                    {
-                        "title": "Go Back",
+                        "title": "Benquest Rooms",
                         "image_url": "https://bit.ly/imageShowRooms",
                         "buttons": [{
                             "type": "postback",
-                            "title": "BACK TO LUNCH MENU",
-                            "payload": "BACK_TO_LUNCH_MENU",
-                        },{
-                            "type": "postback",
-                            "title": "GO TO MAIN MENU",
-                            "payload": "GO_TO_MAIN_MENU",
+                            "title": "SHOW ROOMS",
+                            "payload": "SHOW_ROOMS",
                         }],
-                   }
+                    }
                   ]
                 }
             }
