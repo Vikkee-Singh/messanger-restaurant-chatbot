@@ -146,5 +146,6 @@ let sendMessage = (sender_psid, response) => {
 
 module.exports = {
     getFacebookUsername,
-    sendResWelcomeNewCostomer
+    sendResWelcomeNewCostomer,
+    sendMainMenu
 }
