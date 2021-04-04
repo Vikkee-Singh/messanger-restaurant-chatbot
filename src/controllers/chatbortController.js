@@ -129,6 +129,8 @@ function handlePostback(sender_psid, received_postback) {
     } else if(payload === "GET_STARTED") {
         response = { "text": "Hii there!" }
     }
+    console.log("response ===>", response);
+
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
 }
