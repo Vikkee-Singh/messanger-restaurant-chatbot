@@ -117,7 +117,7 @@ function handleMessage(sender_psid, received_message) {
 }
 
 let handleMessageWithEntities = (message) => {
-    let entitesArr  = ["datetime", "phone_number" ];
+    let entitesArr  = ["wit$datetime:$datetime", "wit$phone_number:phone_number" ];
     let entityChosen = "";
 
     entitesArr.forEach(element => {
