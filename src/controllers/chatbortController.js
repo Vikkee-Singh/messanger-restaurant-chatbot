@@ -122,7 +122,7 @@ function handlePostback(sender_psid, received_postback) {
     let payload = received_postback.payload;
 
     // Set the response based on the postback payload
-    switch (key) {
+    switch (payload) {
         case "GET_STARTED":
             response = { "text": "Welcome to Vikkee Singh's Restaurent!" }
             break;
