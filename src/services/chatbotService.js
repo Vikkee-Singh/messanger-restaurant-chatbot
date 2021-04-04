@@ -326,45 +326,6 @@ let sendPubMenu = (sender_psid) => {
 let sendAppetizer = (sender_psid) => {
     return new Promise((resolve, reject)=>{
         try {
-        //   let response = {
-        //       "attachment": {
-        //           "type": "template",
-        //           "payload": {
-        //             "template_type": "generic",
-        //             "elements": [
-        //               {
-        //                   "title": "Little Neck Clams on the Half Shell",
-        //                   "Subtitle": "Dozen - $20.00",
-        //                   "image_url": "https://bit.ly/imageAppetizer",
-        //               },
-        //               {
-        //                   "title": "Fresh Oysters",
-        //                   "subtitle": "1/2 Dozen - $21.00 | Dozen - $40.00",
-        //                   "image_url": "https://bit.ly/imageSalad",
-        //               },
-        //               {
-        //                   "title": "Lobster Salad",
-        //                   "subtitle": "Half Lobster with Avocado and Grapefruit",
-        //                   "image_url": "https://bit.ly/imageFish",
-        //               },
-        //               {
-        //                 "title": "Go Back",
-        //                 "image_url": "https://bit.ly/imageShowRooms",
-        //                 "buttons": [{
-        //                     "type": "postback",
-        //                     "title": "BACK TO LUNCH MENU",
-        //                     "payload": "BACK_TO_LUNCH_MENU",
-        //                 },{
-        //                     "type": "postback",
-        //                     "title": "GO TO MAIN MENU",
-        //                     "payload": "GO_TO_MAIN_MENU",
-        //                 }],
-        //             }
-        //             ]
-        //           }
-        //       }
-        //   }
-
         let response = {
             "attachment": {
                 "type": "template",
@@ -413,9 +374,17 @@ let sendAppetizer = (sender_psid) => {
     });
 }
 // send Back To Menu
-// let sendBackToMenu = (sender_psid) => {
-    
-// }
+let handleReserveTable = async (sender_psid) => {
+    return new Promise((resolve, reject)=>{
+        try {
+            let username = await getFacebookUsername(sender_psid);
+            let response = { text:  `Hi ${username}, What time and date you would like to reserve a table ?` }
+            sendMessage(sender_psid, response);
+        } catch (error) {
+            reject(error);
+        }
+    })
+}
 
 module.exports = {
     getFacebookUsername,
@@ -425,5 +394,5 @@ module.exports = {
     sendDinnerMenu,
     sendPubMenu,
     sendAppetizer,
-    // sendBackToMenu
+    handleReserveTable
 }
