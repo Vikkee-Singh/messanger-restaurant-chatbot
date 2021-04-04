@@ -326,46 +326,96 @@ let sendPubMenu = (sender_psid) => {
 let sendAppetizer = (sender_psid) => {
     return new Promise((resolve, reject)=>{
         try {
-          let response = {
-              "attachment": {
-                  "type": "template",
-                  "payload": {
-                    "template_type": "generic",
-                    "elements": [
-                      {
-                          "title": "Little Neck Clams on the Half Shell",
-                          "Subtitle": "Dozen - $20.00",
-                          "image_url": "https://bit.ly/imageAppetizer",
-                      },
-                      {
-                          "title": "Fresh Oysters",
-                          "subtitle": "1/2 Dozen - $21.00 | Dozen - $40.00",
-                          "image_url": "https://bit.ly/imageSalad",
-                      },
-                      {
-                          "title": "Lobster Salad",
-                          "subtitle": "Half Lobster with Avocado and Grapefruit",
-                          "image_url": "https://bit.ly/imageFish",
-                      },
-                      {
-                        "title": "Go Back",
-                        "image_url": "https://bit.ly/imageShowRooms",
+        //   let response = {
+        //       "attachment": {
+        //           "type": "template",
+        //           "payload": {
+        //             "template_type": "generic",
+        //             "elements": [
+        //               {
+        //                   "title": "Little Neck Clams on the Half Shell",
+        //                   "Subtitle": "Dozen - $20.00",
+        //                   "image_url": "https://bit.ly/imageAppetizer",
+        //               },
+        //               {
+        //                   "title": "Fresh Oysters",
+        //                   "subtitle": "1/2 Dozen - $21.00 | Dozen - $40.00",
+        //                   "image_url": "https://bit.ly/imageSalad",
+        //               },
+        //               {
+        //                   "title": "Lobster Salad",
+        //                   "subtitle": "Half Lobster with Avocado and Grapefruit",
+        //                   "image_url": "https://bit.ly/imageFish",
+        //               },
+        //               {
+        //                 "title": "Go Back",
+        //                 "image_url": "https://bit.ly/imageShowRooms",
+        //                 "buttons": [{
+        //                     "type": "postback",
+        //                     "title": "BACK TO LUNCH MENU",
+        //                     "payload": "BACK_TO_LUNCH_MENU",
+        //                 },{
+        //                     "type": "postback",
+        //                     "title": "GO TO MAIN MENU",
+        //                     "payload": "GO_TO_MAIN_MENU",
+        //                 }],
+        //             }
+        //             ]
+        //           }
+        //       }
+        //   }
+
+        let response = {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                  "template_type": "generic",
+                  "elements": [
+                    {
+                        "title": "Appetizers",
+                      //   "subtitle": "We are please to offer you the a wide-range of menu for lunch and dinner.",
+                        "image_url": "https://bit.ly/imageAppetizer",
                         "buttons": [{
                             "type": "postback",
-                            "title": "BACK TO LUNCH MENU",
-                            "payload": "BACK_TO_LUNCH_MENU",
-                        },{
-                            "type": "postback",
-                            "title": "GO TO MAIN MENU",
-                            "payload": "GO_TO_MAIN_MENU",
+                            "title": "SHOW APPETIZERS",
+                            "payload": "SHOW_APPETIZERS",
                         }],
-                    }
-                    ]
-                  }
-              }
-          }
-          console.log("=>>>>>>>>>>>", response);
-          sendMessage(sender_psid, response);
+                    },
+                    {
+                        "title": "Entree Salad",
+                        "image_url": "https://bit.ly/imageSalad",
+                        "buttons": [{
+                            "type": "postback",
+                            "title": "SHOW ENTREE SALAD",
+                            "payload": "SHOW_ENTREE_SALAD",
+                        }],
+                    },
+                    {
+                        "title": "Fish and Shell Fish",
+                        "subtitle": "Dry -aged on premise",
+                        "image_url": "https://bit.ly/imageFish",
+                        "buttons": [{
+                            "type": "postback",
+                            "title": "SHOW FISH",
+                            "payload": "SHOW_FISH",
+                        }],
+                    },
+                    {
+                      "title": "Go Back",
+                      "image_url": "https://bit.ly/imageShowRooms",
+                      "buttons": [{
+                          "type": "postback",
+                          "title": "GO TO MAIN MENU",
+                          "payload": "GO_TO_MAIN_MENU",
+                      }],
+                   }
+                  ]
+                }
+            }
+        }
+        sendMessage(sender_psid, response);
+        //   console.log("=>>>>>>>>>>>", response);
+        //   sendMessage(sender_psid, response);
           resolve({value: "Appetizer Sent!"});
         } catch (error) {
             reject(error);
