@@ -375,16 +375,16 @@ let sendAppetizer = (sender_psid) => {
                         "title": "Little Neck Clams on the Half Shell",
                         "subtitle": "Dozen - $20.00",
                         "image_url": "https://bit.ly/imageAppetizer",
-                        "buttons": [{
-                            "type": "postback",
-                            "title": "LUNCH MENU",
-                            "payload": "LUNCH_MENU",
-                        }],
                     },
                     {
                         "title": "Fresh Oysters",
                         "subtitle": "1/2 Dozen - $21.00 | Dozen - $40.00",
                         "image_url": "https://bit.ly/imageSalad",
+                    },
+                    {
+                        "title": "Lobster Salad",
+                        "subtitle": "Half Lobster with Avocado and Grapefruit",
+                        "image_url": "https://bit.ly/imageFish",
                     },
                     {
                         "title": "Go Back",
