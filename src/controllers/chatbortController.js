@@ -120,14 +120,21 @@ function handlePostback(sender_psid, received_postback) {
   
     // Get the payload for the postback
     let payload = received_postback.payload;
-console.log("payload ===>", `$${payload}$`);
+
     // Set the response based on the postback payload
-    if (payload === 'yes') {
-      response = { "text": "Thanks!" }
-    } else if (payload === 'no') {
-      response = { "text": "Oops, try sending another image." }
-    } else if (payload === 'GET_STARTED') {
-        response = { "text": "Hiiii there!" }
+    switch (key) {
+        case "GET_STARTED":
+            response = { "text": "Welcome to Vikkee Singh's Restaurent!" }
+            break;
+        case "yes":
+            response = { "text": "Thanks!" }
+            break;
+        case "no":
+            response = { "text": "Oops, try sending another image." }
+            break;
+        default:
+            console.log("Somthing wrong with switch case payload");
+            break;
     }
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
