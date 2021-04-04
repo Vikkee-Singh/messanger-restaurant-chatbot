@@ -46,9 +46,10 @@ let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
               }
             }
         }
-
-        await sendMessage(sender_psid, response_first);
-        await sendMessage(sender_psid, response_secound);
+        // send welcome message
+        sendMessage(sender_psid, response_first);
+        // send image with button view Menu
+        sendMessage(sender_psid, response_secound);
       })
   }
 
@@ -61,9 +62,7 @@ let sendMessage = (sender_psid, response) => {
       },
       "message": response
     }
-  
     // Send the HTTP request to the Messenger Platform
-    return new Promise((resolve, reject)=>{
         request({
           "uri": "https://graph.facebook.com/v6.0/me/messages",
           "qs": { "access_token": PAGE_ACCESS_TOKEN },
@@ -72,14 +71,10 @@ let sendMessage = (sender_psid, response) => {
         }, (err, res, body) => {
           if (!err) {
               console.log('message sent!')
-              resolve(true);
           } else {
               console.error("Unable to send message:" + err);
-              reject(false)
           }
         }); 
-    })
-
   }
 
 module.exports = {
