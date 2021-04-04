@@ -72,7 +72,7 @@ let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
                         {
                             "title": "Our menus",
                             "subtitle": "We are please to offer you the a wide-range of menu for lunch and dinner.",
-                            "image_url": "https://bit.ly/imageToSend",
+                            "image_url": "https://bit.ly/imageMenu",
                             "buttons": [{
                                 "type": "postback",
                                 "title": "LUNCH MENU",
@@ -93,7 +93,7 @@ let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
                                         SAT 05:00PM - 10:00PM
                                         SUN 05:00PM - 09:00PM
                             `,
-                            "image_url": "https://bit.ly/imageToSend",
+                            "image_url": "https://bit.ly/imageOpening",
                             "buttons": [{
                                 "type": "postback",
                                 "title": "RESERVE A TABLE",
@@ -102,7 +102,7 @@ let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
                         },
                         {
                             "title": "Benquest Rooms",
-                            "image_url": "https://bit.ly/imageToSend",
+                            "image_url": "https://bit.ly/imageShowRooms",
                             "buttons": [{
                                 "type": "postback",
                                 "title": "SHOW ROOMS",
