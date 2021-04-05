@@ -69,7 +69,7 @@ let getWebHook = (req, res)=>{
 
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
-
+console.log("received_message ==>", received_message);
     handleMessageWithEntities(received_message);
 
     // let response;
@@ -131,7 +131,7 @@ let handleMessageWithEntities = (message) => {
 
 function firstEntity(nlp, name) {
     console.log("nlp ===>", nlp);
-    console.log("name ===>", nlp.entities);
+    console.log("name ===>", name);
 	return nlp && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 }
 
