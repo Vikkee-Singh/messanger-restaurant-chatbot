@@ -407,7 +407,7 @@ let sendMessageAskingQuality = (sender_psid) => {
                 "payload":"MEDIUM",
               },{
                 "content_type":"text",
-                "title":"> 5",
+                "title":"More then 5",
                 "payload":"LARGE",
               }
             ]
@@ -459,6 +459,42 @@ let sendMessageAskingPhoneNumber = (sender_psid) => {
     }); 
 }
 
+let sendMessageDoneReserveTable = async (sender_psid) => {
+    try {
+        let response = {
+            "attachment": {
+                "type": "image",
+                "payload": {
+                    "url": "https://bit.ly/giftDonalTrump"
+                }
+            }
+        }
+        sendMessage(sender_psid, response);
+        // get facebook username
+        let username = await getFacebookUsername(sender_psid);
+        // send another message
+        let response2 = {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                  "template_type": "button",
+                  "text": `Done! \nOur reservation team will contact you as soon as possible ${username}\n \nWould you like to check our Main Menu?`,
+                    "buttons": [
+                      {
+                        "type": "postback",
+                        "title": "SHOW MAIN MENU",
+                        "payload": "MAIN_MENU",
+                      }
+                    ]
+                }
+            }
+        }
+        sendMessage(sender_psid, response2);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
     getFacebookUsername,
     sendResWelcomeNewCostomer,
@@ -469,5 +505,6 @@ module.exports = {
     sendAppetizer,
     handleReserveTable,
     sendMessageAskingQuality,
-    sendMessageAskingPhoneNumber
+    sendMessageAskingPhoneNumber,
+    sendMessageDoneReserveTable
 }

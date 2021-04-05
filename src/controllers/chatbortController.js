@@ -73,8 +73,12 @@ let handleMessage = async (sender_psid, message) => {
     if (message && message.quick_reply && message.quick_reply.payload) {
         if (message.quick_reply.payload === "SMALL" || message.quick_reply.payload === "MEDIUM" || message.quick_reply.payload === "LARGE") {
             await chatbootService.sendMessageAskingPhoneNumber(sender_psid);
+            return;   
         }
-        return;     
+        if (message.quick_reply.payload !== " ") {
+            await chatbootService.sendMessageDoneReserveTable(sender_psid);
+        }
+        return;   
     }
 
     // handle text message
@@ -84,7 +88,8 @@ let handleMessage = async (sender_psid, message) => {
         // handle quick reply message: 
         await chatbootService.sendMessageAskingQuality(sender_psid);
     } else if (entity.name === "wit$phone_number:phone_number") {
-        // handle quick reply message: 
+        // handle quick reply message:
+        await chatbootService.sendMessageDoneReserveTable(sender_psid);
     } else {
         
     }
