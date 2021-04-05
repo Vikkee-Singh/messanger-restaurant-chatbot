@@ -1,9 +1,19 @@
 require('dotenv').config();
 import request from "request";
+import moment from "moment";
 import chatbootService from "../services/chatbotService";
 // env const to use in side functions
 let MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
+let TELEGRAM_GROUP_ID = process.env.TELEGRAM_GROUP_ID
+
+let user = {
+    name: "",
+    phoneNumer: "",
+    time: "",
+    quantity: "",
+    createdAt: ""
+};
     
 let postWebHook = (req, res)=>{// Parse the request body from the POST
     let body = req.body;
@@ -72,10 +82,18 @@ let handleMessage = async (sender_psid, message) => {
     // check quick reply
     if (message && message.quick_reply && message.quick_reply.payload) {
         if (message.quick_reply.payload === "SMALL" || message.quick_reply.payload === "MEDIUM" || message.quick_reply.payload === "LARGE") {
+            if (message.quick_reply.payload === "SMALL") user.quantity = "1-2 people";
+            if (message.quick_reply.payload === "MEDIUM") user.quantity = "2-5 people";
+            if (message.quick_reply.payload === "LARGE") user.quantity = "More than 5 people";
             await chatbootService.sendMessageAskingPhoneNumber(sender_psid);
             return;   
         }
         if (message.quick_reply.payload !== " ") {
+            user.phoneNumer = message.quick_reply.payload;
+            user.createdAt = moment(Date.now()).zone("+05:30").format("MM/DD/YYYY h:mm: A");
+            // send a notification to telegram group chat by Telegram bot
+            await chatbootService.sendnotificationToTelegram(user);
+            // send message to the user
             await chatbootService.sendMessageDoneReserveTable(sender_psid);
         }
         return;   
@@ -85,9 +103,17 @@ let handleMessage = async (sender_psid, message) => {
     let entity = handleMessageWithEntities(message);
 
     if (entity.name === "wit$datetime:datetime") {
+        user.time = moment(Date.now()).zone("+05:30").format("MM/DD/YYYY h:mm: A");
+
         // handle quick reply message: 
         await chatbootService.sendMessageAskingQuality(sender_psid);
     } else if (entity.name === "wit$phone_number:phone_number") {
+        user.phoneNumer = entity.value;
+        user.createdAt = moment(Date.now()).zone("+05:30").format("MM/DD/YYYY h:mm: A");
+
+        // send a notification to telegram group chat by Telegram bot
+        await chatbootService.sendnotificationToTelegram(user);
+
         // handle quick reply message:
         await chatbootService.sendMessageDoneReserveTable(sender_psid);
     } else {

@@ -3,8 +3,8 @@ require('dotenv').config();
 import request from "request";
 
 // env const to use in side functions
-let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
-  
+let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+let TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "";
 let getFacebookUsername = (sender_psid) => {
     //   curl -X GET "https://graph.facebook.com/<PSID>?fields=first_name,last_name,profile_pic&access_token=<PAGE_ACCESS_TOKEN>"
     let uri = `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`
@@ -484,6 +484,11 @@ let sendMessageDoneReserveTable = async (sender_psid) => {
                         "type": "postback",
                         "title": "SHOW MAIN MENU",
                         "payload": "MAIN_MENU",
+                      },
+                      {
+                        "type": "phone_number",
+                        "title": "HOT LINE",
+                        "payload": "+911911",
                       }
                     ]
                 }
@@ -493,6 +498,39 @@ let sendMessageDoneReserveTable = async (sender_psid) => {
     } catch (error) {
         console.log(error);
     }
+}
+
+let sendnotificationToTelegram = async (sender_psid) => {
+    return new Promise((resolve, reject)=>{
+        try {
+            let request_body = {
+                chat_id: process.env.TELEGRAM_GROUP_ID,
+                parse_mode: "HTML",
+                text: `
+                |---<b>A new reservetion</b> ---|
+                |-------------------------------------|
+                | 1. Username: <b>${use.name}</b> |
+                | 1. Phone number: <b>${use.phoneNumber}</b> |
+                | 1. Time: <b>${use.time}</b> |
+                | 1. Quantity: <b>${use.quantity}</b> |
+                | 1. Created at: <b>${use.createdAt}</b> |
+                |-------------------------------------|`
+            }
+            request({
+                "uri": `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`,
+                "method": "POST",
+                "json": request_body
+            },(err, res, boby) => {
+                if (!err) {
+                    resolve({value: 'Done!'})
+                } else {
+                    reject({reason: "Unable to send message:" + err});
+                }
+            })
+        } catch (error) {
+            reject(error);
+        }
+    })
 }
 
 module.exports = {
@@ -506,5 +544,6 @@ module.exports = {
     handleReserveTable,
     sendMessageAskingQuality,
     sendMessageAskingPhoneNumber,
-    sendMessageDoneReserveTable
+    sendMessageDoneReserveTable,
+    sendnotificationToTelegram
 }
