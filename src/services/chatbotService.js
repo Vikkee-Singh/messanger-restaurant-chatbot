@@ -5,7 +5,7 @@ import request from "request";
 // env const to use in side functions
 let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
   
-  let getFacebookUsername = (sender_psid) => {
+let getFacebookUsername = (sender_psid) => {
     //   curl -X GET "https://graph.facebook.com/<PSID>?fields=first_name,last_name,profile_pic&access_token=<PAGE_ACCESS_TOKEN>"
     let uri = `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`
     return new Promise((resolve, reject)=>{
@@ -22,11 +22,11 @@ let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
             });
     });
 
-  }
+}
 
-  let sendResWelcomeNewCostomer = (username, sender_psid) => {
-      return new Promise((resolve,reject)=>{
-          try {
+let sendResWelcomeNewCostomer = (username, sender_psid) => {
+    return new Promise((resolve,reject)=>{
+        try {
             let response_first = { "text": `Welcome ${username} to Vikkee Singh's Restaurent!` }
             let response_secound = {
                 "attachment": {
@@ -48,21 +48,20 @@ let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
                     }
                 }
             }
-              // send welcome message
-              sendMessage(sender_psid, response_first);
-              // send image with button view Menu
-              sendMessage(sender_psid, response_secound);
-              
-              resolve({value: "Done"})
-          } catch (error) {
+            // send welcome message
+            sendMessage(sender_psid, response_first);
+            // send image with button view Menu
+            sendMessage(sender_psid, response_secound);  
+            resolve({value: "Done"})
+        } catch (error) {
             reject(error);
-          }
-      })
-  }
+        }
+    })
+}
 
-  let sendMainMenu = (sender_psid) => {
-      return new Promise((resolve, reject)=>{
-          try {
+let sendMainMenu = (sender_psid) => {
+    return new Promise((resolve, reject)=>{
+        try {
             let response = {
                 "attachment": {
                     "type": "template",
@@ -119,7 +118,7 @@ let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
               reject(error);
           }
       });
-  }
+}
 
   // Sends response messages via the Send API
 let sendMessage = (sender_psid, response) => {
@@ -388,6 +387,47 @@ let handleReserveTable = (sender_psid) => {
     })
 }
 
+let sendMessageAskingQuality = (sender_psid) => {
+    // Construct the message body
+    let request_body = {
+        "recipient":{
+            "id": sender_psid
+          },
+          "messaging_type": "RESPONSE",
+          "message":{
+            "text": "What is your party size ?",
+            "quick_replies":[
+              {
+                "content_type":"text",
+                "title":"1-2",
+                "payload":"SMALL",
+              },{
+                "content_type":"text",
+                "title":"2-5",
+                "payload":"MEDIUM",
+              },{
+                "content_type":"text",
+                "title":"> 5",
+                "payload":"LARGE",
+              }
+            ]
+          }
+    }
+    // Send the HTTP request to the Messenger Platform
+    request({
+        "uri": "https://graph.facebook.com/v6.0/me/messages",
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('message sent!')
+        } else {
+            console.error("Unable to send message:" + err);
+        }
+    }); 
+}
+
 module.exports = {
     getFacebookUsername,
     sendResWelcomeNewCostomer,
@@ -396,5 +436,6 @@ module.exports = {
     sendDinnerMenu,
     sendPubMenu,
     sendAppetizer,
-    handleReserveTable
+    handleReserveTable,
+    sendMessageAskingQuality
 }

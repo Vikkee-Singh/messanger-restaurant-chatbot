@@ -68,9 +68,18 @@ let getWebHook = (req, res)=>{
 };
 
 // Handles messages events
-function handleMessage(sender_psid, received_message) {
-// console.log("received_message ==>", received_message);
-    handleMessageWithEntities(received_message);
+let handleMessage = async (sender_psid, received_message) => {
+    // handle text message
+    let entity = handleMessageWithEntities(received_message);
+
+    if (entity.name === "wit$datetime:datetime") {
+        // handle quick reply message: 
+        await chatbootService.sendMessageAskingQuality(sender_psid);
+    } else if (entity.name === "wit$phone_number:phone_number") {
+        // handle quick reply message: 
+    } else {
+        
+    }
 
     // let response;
   
@@ -119,14 +128,16 @@ function handleMessage(sender_psid, received_message) {
 let handleMessageWithEntities = (message) => {
     let entitesArr  = ["wit$datetime:datetime", "wit$phone_number:phone_number" ];
     let entityChosen = "";
-
+    let data = {};
     entitesArr.forEach(element => {
         let entity = firstEntity(message.nlp, element);
-        if(entity && entity.confidence > 0.8) entityChosen = element;
+        if(entity && entity.confidence > 0.8) {
+            entityChosen = element;
+            data.value = entity.value;
+        }
     })
-    console.log("------------- ==>");
-    console.log("entityChosen ==>", entityChosen);
-    console.log("------------- ==>");
+    data.name = entityChosen;
+    return data;
 }
 
 let firstEntity = (nlp, name) => nlp && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
