@@ -130,7 +130,7 @@ let handleMessageWithEntities = (message) => {
 }
 
 function firstEntity(nlp, name) {
-    console.log("nlp ===>", nlp);
+    console.log("nlp ===>", nlp && nlp.entities || "nlp not found");
     console.log("name ===>", name);
 	return nlp && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 }
