@@ -428,6 +428,37 @@ let sendMessageAskingQuality = (sender_psid) => {
     }); 
 }
 
+let sendMessageAskingPhoneNumber = (sender_psid) => {
+    // Construct the message body
+    let request_body = {
+        "recipient":{
+            "id": sender_psid
+          },
+          "messaging_type": "RESPONSE",
+          "message":{
+            "text": "Thank you. And what's the best phone number for us to reach you at?",
+            "quick_replies":[
+              {
+                "content_type": "user_phone_number"
+              }
+            ]
+          }
+    }
+        // Send the HTTP request to the Messenger Platform
+    request({
+        "uri": "https://graph.facebook.com/v6.0/me/messages",
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('message sent!')
+        } else {
+            console.error("Unable to send message:" + err);
+        }
+    }); 
+}
+
 module.exports = {
     getFacebookUsername,
     sendResWelcomeNewCostomer,
@@ -437,5 +468,6 @@ module.exports = {
     sendPubMenu,
     sendAppetizer,
     handleReserveTable,
-    sendMessageAskingQuality
+    sendMessageAskingQuality,
+    sendMessageAskingPhoneNumber
 }

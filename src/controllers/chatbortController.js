@@ -68,9 +68,17 @@ let getWebHook = (req, res)=>{
 };
 
 // Handles messages events
-let handleMessage = async (sender_psid, received_message) => {
+let handleMessage = async (sender_psid, message) => {
+    // check quick reply
+    if (message && message.quick_reply && message.quick_reply.payload) {
+        if (message.quick_reply.payload === "SMALL" || message.quick_reply.payload === "MEDIUM" || message.quick_reply.payload === "LARGE") {
+            await chatbootService.sendMessageAskingPhoneNumber(sender_psid);
+        }
+        return;     
+    }
+
     // handle text message
-    let entity = handleMessageWithEntities(received_message);
+    let entity = handleMessageWithEntities(message);
 
     if (entity.name === "wit$datetime:datetime") {
         // handle quick reply message: 
