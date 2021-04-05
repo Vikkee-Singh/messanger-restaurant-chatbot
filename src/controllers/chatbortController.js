@@ -69,7 +69,7 @@ let getWebHook = (req, res)=>{
 
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
-console.log("received_message ==>", received_message);
+// console.log("received_message ==>", received_message);
     handleMessageWithEntities(received_message);
 
     // let response;
@@ -122,22 +122,17 @@ let handleMessageWithEntities = (message) => {
 
     entitesArr.forEach(element => {
         let entity = firstEntity(message.nlp, element);
-        if(entity && entity.confidence > 0.8) { 
-            entityChosen = element
-        }
+        if(entity && entity.confidence > 0.8) entityChosen = element;
     })
+    console.log("------------- ==>");
     console.log("entityChosen ==>", entityChosen);
+    console.log("------------- ==>");
 }
 
-function firstEntity(nlp, name) {
-    console.log("nlp ===>", nlp && nlp.entities || "nlp not found");
-    console.log("name ===>", name);
-	return nlp && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
-}
+let firstEntity = (nlp, name) => nlp && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 
 // Handles messaging_postbacks events
 let handlePostback = async (sender_psid, received_postback) => {
-    let response;
     // Get the payload for the postback
     let payload = received_postback.payload;
 
@@ -146,7 +141,6 @@ let handlePostback = async (sender_psid, received_postback) => {
         case "GET_STARTED":
             let username = await chatbootService.getFacebookUsername(sender_psid);
             await chatbootService.sendResWelcomeNewCostomer(username, sender_psid);
-            // response = { "text": `Welcome ${username} to Vikkee Singh's Restaurent!` }
             break;
         case "MAIN_MENU":
             await chatbootService.sendMainMenu(sender_psid);
